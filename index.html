@@ -23,7 +23,7 @@
   <!-- Site title -->
   
   
-      <title>FLY-TTS: Fast, Lightweight and High-Quality End-to-End Text-to-Speech Synthesis</title>
+      <title>ProsodyFlow: High-fidelity Text-to-Speech through Conditional Flow Matching and Prosody Modeling with Large Speech Language Models</title>
   
  
 </head>
@@ -33,15 +33,15 @@
   <section class="jumbotron text-center">
 <div class="container">
   
-      <h1 class="jumbotron-heading">FLY-TTS: Fast, Lightweight and High-Quality End-to-End Text-to-Speech Synthesis</h1>
+      <h1 class="jumbotron-heading">ProsodyFlow: High-fidelity Text-to-Speech through Conditional Flow Matching and Prosody Modeling with Large Speech Language Models</h1>
       <p class="lead">
-        Yinlin Guo, Yening Lv, Jinqiao Dou, Yan Zhang, Yuehai Wang
+        Haoyu Wang, Sizhe Shan, Yinlin Guo, Yuehai Wang
       </p>
       <p class="lead">
         Department of Information and Electronic Engineering, Zhejiang University, China<br>
     </p>
       <p class="lead">
-        Accepted to Interspeech 2024<br> 
+        Submitted to COLING 2025<br> 
           [<a href="https://arxiv.org/abs/2407.00753">Paper</a>] 
       </p>
       
@@ -57,12 +57,11 @@
 
 <div class="row">
   <p class="lead">
-    While recent advances in Text-To-Speech synthesis have yielded remarkable improvements in generating high-quality speech, research on lightweight and fast models is limited.    This paper introduces FLY-TTS, a new fast, lightweight and high-quality speech synthesis system based on VITS.
-    Specifically, 1) We replace the decoder with ConvNeXt blocks that generate Fourier spectral coefficients followed by the inverse short-time Fourier transform to synthesize waveforms;
-    2) To compress the model size, we introduce the grouped parameter-sharing mechanism to the text encoder and flow-based model;
-    3) We further employ the large pre-trained WavLM model for adversarial training to improve synthesis quality.
-    Experimental results show that our model achieves a real-time factor of 0.0139 on an Intel Core i9 CPU, 8.8x faster than the baseline (0.1221), with a 1.6x parameter compression.
-    Objective and subjective evaluations indicate that FLY-TTS exhibits comparable speech quality to the strong baseline.
+    Text-to-speech (TTS) has seen significant advancements in high-quality, expressive speech synthesis. 
+    However, achieving diverse and natural prosody in synthesized speech remains challenging. 
+    We propose ProsodyFlow, an end-to-end TTS model that integrates large speech language models and the conditional flow matching algorithm to model prosodic features effectively. 
+    Our approach leverages the speech LLMs to extract acoustic features, which are mapped into a prosody latent space, and utilizes conditional flow matching to predict prosodic vectors conditioned on text-derived encodings. 
+    Experiments on the LJSpeech dataset show that ProsodyFlow improves synthesis quality and efficiency compared to existing models, achieving more prosodic and expressive speech. 
   </p>
 </div>
 
