@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.88.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<title>ProsodyFlow</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1091.0" data-gr-ext-installed="">
+
+<div class=" container" >
+<header>
+</header>
+<main>
+<article itemscope itemtype="https://schema.org/BlogPosting">
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<div class="text-center">
+		<h1>ProsodyFlow:</h1>
+        <h3>High-fidelity Text-to-Speech through Conditional Flow Matching and Prosody Modeling with Large Speech Language Models</h3>
+		<p>Haoyu Wang, Sizhe Shan, Yinlin Guo, Yuehai Wang</p>  
+		<p>Department of Information and Electronic Engineering, Zhejiang University, China<br></p> 
+		<p>Submitted to COLING 2025<br>  </p>  
+	</div>
+	<p>
+        <b>Abstract.</b> 
+		Text-to-speech (TTS) has seen significant advancements in high-quality, expressive speech synthesis. 
+      However, achieving diverse and natural prosody in synthesized speech remains challenging. 
+      We propose ProsodyFlow, an end-to-end TTS model that integrates large speech language models and the conditional flow matching algorithm to model prosodic features effectively. 
+      Our approach leverages the speech LLMs to extract acoustic features, which are mapped into a prosody latent space, and utilizes conditional flow matching to predict prosodic vectors conditioned on text-derived encodings. 
+      Experiments on the LJSpeech dataset show that ProsodyFlow improves synthesis quality and efficiency compared to existing models, achieving more prosodic and expressive speech.<br>
+		
+      </p>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">		
+	<h2 id="model-overview" style="text-align: center;">Overview</h2>
+		<p style="text-align: center;">
+			<img src="pics/figure1.png" width="1000" alt="">
+			
+		</p>
+		<p style="text-align: center;">
+			<b>Figure 1：</b> ProsodyFlow modules training. The pitch extractor and ASR modules are pre-trained models with their parameters frozen. The prosody encoder utilizes the outputs from each layer of WavLM.
+		</p>
+		<p style="text-align: center;">
+			<img src="pics/figure2.png" width="500" alt="">
+			
+		</p>
+		<p style="text-align: center;">
+			<b>Figure 2：</b> ProsodyFlow inference.
+		</p>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 style="text-align: center;">Comparision with other TTS models</h2>
+		<div class="table-responsive pt-3" tabindex="0">
+			<table class="table table-hover pt-2">
+				<thead>
+					<tr>
+					<th style="text-align: center">Text</th>
+					<th style="text-align: center">Ground Truth</th>
+					<th style="text-align: center">ProsodyFlow</th>
+					<th style="text-align: center">FastSpeech 2</th>
+					<th style="text-align: center">GradTTS</th>
+					<th style="text-align: center">StyleTTS 2</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align: left;vertical-align:middle;width: 700px;min-width: 700px">In all these lines the facts are drawn together by a strong thread of unity.</td>	
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/gt/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/prosodyflow-8/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/fastspeech2/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/gradtts/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/styletts2/1.wav" >Your browser does not support the audio element.</audio></td>
+					</tr>
+					<tr>
+						<td style="text-align: left;vertical-align:middle;width: 700px;min-width: 700px">After the construction and action of the machine had been explained, the doctor asked the governor what kind of men he had commanded at Goree.</td>	
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/gt/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/prosodyflow-8/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/fastspeech2/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/gradtts/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/styletts2/2.wav" >Your browser does not support the audio element.</audio></td>
+					</tr>
+					<tr>
+						<td style="text-align: left;vertical-align:middle;width: 700px;min-width: 700px">After a few years of active exertion the Society was rewarded by fresh legislation.</td>	
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/gt/3.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/prosodyflow-8/3.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/fastspeech2/3.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/gradtts/3.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/models/styletts2/3.wav" >Your browser does not support the audio element.</audio></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 style="text-align: center;">Comparision with different number of function evaluations</h2>
+		<div class="table-responsive pt-3" tabindex="0">
+			<table class="table table-hover pt-2">
+				<thead>
+					<tr>
+					<th style="text-align: center">Text</th>
+					<th style="text-align: center">1 step</th>
+					<th style="text-align: center">4 steps</th>
+					<th style="text-align: center">8 steps</th>
+					<th style="text-align: center">16 steps</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align: left;vertical-align:middle;width: 700px;min-width: 700px">The lax discipline maintained in Newgate was still further deteriorated by the presence of two other classes of prisoners who ought never to have been inmates of such a jail.</td>	
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm1/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm4/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm8/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm16/1.wav" >Your browser does not support the audio element.</audio></td>
+						</tr>
+					<tr>
+						<td style="text-align: left;vertical-align:middle;width: 700px;min-width: 700px">Maltby and Co. would issue warrants on them deliverable to the importer, and the goods were then passed to be stored in neighboring warehouses.</td>	
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm1/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm4/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm8/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm16/2.wav" >Your browser does not support the audio element.</audio></td>
+					</tr>
+					<tr>
+						<td style="text-align: left;vertical-align:middle;width: 700px;min-width: 700px">A bribe to the judge was certain to secure acquittal, and the neglect of the formality was as certainly followed by condemnation.</td>	
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm1/3.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm4/3.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm8/3.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/steps/cfm16/3.wav" >Your browser does not support the audio element.</audio></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 style="text-align: center;">Ablation study of the proposed method</h2>
+		<div class="table-responsive pt-3" tabindex="0">
+			<table class="table table-hover pt-2">
+				<thead>
+					<tr>
+					<th style="text-align: center">Text</th>
+					<th style="text-align: center">Proposed</th>
+					<th style="text-align: center">w/o WavLM</th>
+					<th style="text-align: center">w/o prosody flow matching</th>
+					<th style="text-align: center">w/o flow matching w/ diffusion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align: left;vertical-align:middle;width: 700px;min-width: 700px">Let me retrace my steps, and speak more in detail of the treatment of the condemned in those bloodthirsty and brutally indifferent days.</td>	
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/ablation/base/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/ablation/no_wavlm/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/ablation/no_flow/1.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/ablation/flow_to_diffusion/1.wav" >Your browser does not support the audio element.</audio></td>
+						</tr>
+					<tr>
+						<td style="text-align: left;vertical-align:middle;width: 700px;min-width: 700px">He was in consequence put out of the protection of their internal law, end quote. Their code was a subject of some curiosity.</td>	
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/ablation/base/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/ablation/no_wavlm/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/ablation/no_flow/2.wav" >Your browser does not support the audio element.</audio></td>
+						<td style="text-align: center"><audio controls="controls" style="width: 160px;"><source src="audios/ablation/flow_to_diffusion/2.wav" >Your browser does not support the audio element.</audio></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+</div>
+
+</html>
